@@ -49,8 +49,6 @@ function RSGCore.Functions.DrawText3D(x, y, z, text)
     ClearDrawOrigin()
 end
 
-
-
 RSGCore.Functions.RequestAnimDict = lib.requestAnimDict
 
 RSGCore.Functions.LoadModel = lib.requestModel
@@ -65,37 +63,8 @@ function RSGCore.Functions.PlayAnim(animDict, animName, upperbodyOnly, duration)
     RemoveAnimDict(animDict)
 end
 
-
-
-RegisterNUICallback('getNotifyConfig', function(_, cb)
-    cb(RSGCore.Config.Notify)
-end)
-
 ---@alias NotificationPosition 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left'
 ---@alias NotificationType 'inform' | 'error' | 'success'
----@alias DeprecatedNotificationType 'primary'
-
----@class NotifyProps
----@field id? string notifications with the same id will not be on the screen at the same time
----@field title? string displayed to the player
----@field description? string displayed to the player
----@field duration? number milliseconds notification is on screen
----@field position? NotificationPosition
----@field type? NotificationType
----@field icon? string https://fontawesome.com icon name
----@field iconColor? string css color value for the icon
-
----Text box popup for player which dissappears after a set time.
----@param props NotifyProps
-function RSGCore.Functions.NotifyV2(props)
-    props.style = nil
-    if not props.position then
-        props.position = RSGConfig.NotifyPosition
-    end
-    lib.notify(props)
-end
-
----@deprecated in favor of RSGCore.Functions.NotifyV2()
 ---@param text table|string text of the notification
 ---@param notifyType? NotificationType|DeprecatedNotificationType informs default styling. Defaults to 'inform'.
 ---@param duration? integer milliseconds notification will remain on scren. Defaults to 5000.
@@ -118,7 +87,6 @@ function RSGCore.Debug(resource, obj, depth)
 end
 
 -- Callback Functions --
-
 -- Client Callback
 function RSGCore.Functions.CreateClientCallback(name, cb)
     RSGCore.ClientCallbacks[name] = cb
@@ -382,7 +350,7 @@ function RSGCore.Functions.GetBoneDistance(entity, boneType, boneIndex)
 end
 
 function RSGCore.Functions.AttachProp(ped, model, boneId, x, y, z, xR, yR, zR, vertex)
-    local modelHash = type(model) == 'string' and GetHashKey(model) or model
+    local modelHash = type(model) == 'string' and joaat(model) or model
     local bone = GetPedBoneIndex(ped, boneId)
     lib.requestModel(modelHash)
     local prop = CreateObject(modelHash, 1.0, 1.0, 1.0, 1, 1, 0)
@@ -394,7 +362,7 @@ end
 -- Vehicle
 
 function RSGCore.Functions.SpawnVehicle(model, cb, coords, isnetworked, teleportInto)
-    model = type(model) == 'string' and GetHashKey(model) or model
+    model = type(model) == 'string' and joaat(model) or model
     if not IsModelInCdimage(model) then return end
     if coords then
         coords = type(coords) == 'table' and vec3(coords.x, coords.y, coords.z) or coords

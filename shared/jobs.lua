@@ -4,7 +4,7 @@ RSGShared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefa
 
 RSGShared.Jobs = {
 
-    ['unemployed'] = {
+    unemployed = {
         label = 'Civilian',
         defaultDuty = true,
         offDutyPay = false,
@@ -12,7 +12,7 @@ RSGShared.Jobs = {
             ['0'] = { name = 'Freelancer', payment = 5 },
         },
     },
-    ['vallaw'] = {
+    vallaw = {
         label = 'Valentine Law Enforcement',
         type = 'leo',
         defaultDuty = false,
@@ -23,7 +23,7 @@ RSGShared.Jobs = {
             ['2'] = { name = 'Sheriff', isboss = true, payment = 50 },
         },
     },
-    ['rholaw'] = {
+    rholaw = {
         label = 'Rhodes Law Enforcement',
         type = 'leo',
         defaultDuty = false,
@@ -34,7 +34,7 @@ RSGShared.Jobs = {
             ['2'] = { name = 'Sheriff', isboss = true, payment = 50 },
         },
     },
-    ['blklaw'] = {
+    blklaw = {
         label = 'Blackwater Law Enforcement',
         type = 'leo',
         defaultDuty = false,
@@ -45,7 +45,7 @@ RSGShared.Jobs = {
             ['2'] = { name = 'Sheriff', isboss = true, payment = 50 },
         },
     },
-    ['strlaw'] = {
+    strlaw = {
         label = 'Strawberry Law Enforcement',
         type = 'leo',
         defaultDuty = false,
@@ -56,7 +56,7 @@ RSGShared.Jobs = {
             ['2'] = { name = 'Sheriff', isboss = true, payment = 50 },
         },
     },
-    ['stdenlaw'] = {
+    stdenlaw = {
         label = 'Saint Denis Law Enforcement',
         type = 'leo',
         defaultDuty = false,
@@ -67,7 +67,7 @@ RSGShared.Jobs = {
             ['2'] = { name = 'Sheriff', isboss = true, payment = 50 },
         },
     },
-    ['medic'] = {
+    medic = {
         label = 'Medic',
         defaultDuty = false,
         offDutyPay = false,

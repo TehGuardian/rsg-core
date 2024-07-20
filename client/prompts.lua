@@ -165,7 +165,7 @@ CreateThread(function()
 
                     Citizen.InvokeNative(0xC65A45D4453C2627, promptGroup, CreateVarString(10, 'LITERAL_STRING', PromptGroups[k].label), 1)
 
-                    for i,j in pairs(PromptGroups[k].prompts) do
+                    for _,j in pairs(PromptGroups[k].prompts) do
                         if (Citizen.InvokeNative(0xE0F65F0640EF0617, j.prompt)) then
                             executeOptions(j.options)
                             j.prompt = nil
@@ -174,7 +174,7 @@ CreateThread(function()
                     end
                 else
                     if (PromptGroups[k].active) then
-                        for i,j in pairs(PromptGroups[k].prompts) do
+                        for _,j in pairs(PromptGroups[k].prompts) do
                             j.prompt = nil
                         end
                         Prompts[k].active = false

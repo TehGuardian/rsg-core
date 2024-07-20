@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'rdr3'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
-
+lua54 'yes'
 description 'rsg-core'
 version '1.4.0'
 
@@ -21,7 +21,7 @@ client_scripts {
     'client/events.lua',
     'client/drawtext.lua',
     'client/prompts.lua',
-     'client/noclip.lua',
+    'client/noclip.lua',
     'client/pvp.lua'
 }
 
@@ -41,5 +41,3 @@ dependency {
     'oxmysql',
     'ox_lib'
 }
-
-lua54 'yes'

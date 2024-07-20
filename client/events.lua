@@ -24,7 +24,11 @@ RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
     if RSGConfig.Player.RevealMap then
         SetMinimapHideFow(true)
     end
-    Citizen.InvokeNative(0x39363DFD04E91496, PlayerId(), true) -- enable mercy kil
+    if RSGConfig.DisableAutoAim then
+        SetPlayerTargetingMode(3)
+        SetPlayerInVehicleTargetingMode(3)
+    end
+    Citizen.InvokeNative(0x39363DFD04E91496, PlayerId(), true) -- enable mercy kill
     Citizen.InvokeNative(0x8899C244EBCF70DE, PlayerPedId(), 0.0) -- SetPlayerHealthRechargeMultiplier
     Citizen.InvokeNative(0xDE1B1907A83A1550, PlayerPedId(), 0.0) -- SetHealthRechargeMultiplier
 end)
@@ -74,7 +78,7 @@ end)
 -- HORSE / WAGON
 
 RegisterNetEvent('RSGCore:Command:SpawnVehicle', function(WagonName)
-    local hash = GetHashKey(WagonName)
+    local hash = joaat(WagonName)
     if not IsModelInCdimage(hash) then return end
     RequestModel(hash)
     while not HasModelLoaded(hash) do
@@ -88,7 +92,7 @@ RegisterNetEvent('RSGCore:Command:SpawnVehicle', function(WagonName)
 end)
 
 RegisterNetEvent('RSGCore:Command:SpawnHorse', function(HorseName)
-    local hash = GetHashKey(HorseName)
+    local hash = joaat(HorseName)
     if not IsModelInCdimage(hash) then return end
     RequestModel(hash)
     while not HasModelLoaded(hash) do
@@ -185,11 +189,11 @@ function Display(mePlayer, text, offset, type, custom)
     local displaying = true
     local _type = type
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         Wait(time)
         displaying = false
     end)
-    Citizen.CreateThread(function()
+    CreateThread(function()
         RDisplaying = RDisplaying + 1
         while displaying do
             Wait(1)

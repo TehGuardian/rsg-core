@@ -125,9 +125,9 @@ RegisterNetEvent('RSGCore:UpdatePlayer', function()
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
     if not Player then return end
-    local newHunger = Player.PlayerData.metadata['hunger'] - RSGCore.Config.Player.HungerRate
-    local newThirst = Player.PlayerData.metadata['thirst'] - RSGCore.Config.Player.ThirstRate
-    local newCleanliness = Player.PlayerData.metadata['cleanliness'] - RSGCore.Config.Player.CleanlinessRate
+    local newHunger = Player.PlayerData.metadata.hunger - RSGCore.Config.Player.HungerRate
+    local newThirst = Player.PlayerData.metadata.thirst - RSGCore.Config.Player.ThirstRate
+    local newCleanliness = Player.PlayerData.metadata.cleanliness - RSGCore.Config.Player.CleanlinessRate
     if newHunger <= 0 then
         newHunger = 0
     end
@@ -154,7 +154,7 @@ RegisterNetEvent('RSGCore:Server:SetMetaData', function(meta, data)
         end
     end
     Player.Functions.SetMetaData(meta, data)
-    TriggerClientEvent('hud:client:UpdateNeeds', src, Player.PlayerData.metadata['hunger'], Player.PlayerData.metadata['thirst'], Player.PlayerData.metadata['cleanliness'])
+    TriggerClientEvent('hud:client:UpdateNeeds', src, Player.PlayerData.metadata.hunger, Player.PlayerData.metadata.thirst, Player.PlayerData.metadata.cleanliness)
 end)
 
 RegisterNetEvent('RSGCore:ToggleDuty', function()
@@ -235,9 +235,9 @@ end)
 -- use the netid on the client with the NetworkGetEntityFromNetworkId native
 -- convert it to a vehicle via the NetToVeh native
 RSGCore.Functions.CreateCallback('RSGCore:Server:CreateVehicle', function(source, cb, model, coords, warp)
-    model = type(model) == 'string' and GetHashKey(model) or model
+    model = type(model) == 'string' and joaat(model) or model
     if not coords then coords = GetEntityCoords(GetPlayerPed(source)) end
-    local CreateAutomobile = GetHashKey("CREATE_AUTOMOBILE")
+    local CreateAutomobile = joaat("CREATE_AUTOMOBILE")
     local veh = Citizen.InvokeNative(CreateAutomobile, model, coords, coords.w, true, true)
     while not DoesEntityExist(veh) do Wait(0) end
     if warp then TaskWarpPedIntoVehicle(GetPlayerPed(source), veh, -1) end
